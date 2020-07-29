@@ -36,6 +36,7 @@ class Modific:
             en_nums = [int(i) for i in re.findall("\d+", en_snt)]
             de_nums = [int(i) for i in re.findall("\d+", de_snt)]
             if en_nums != de_nums:
+                num_per_input.append(str(n))
                 continue
             for num in en_nums:
                 for k in range(-offset, offset, 1):
