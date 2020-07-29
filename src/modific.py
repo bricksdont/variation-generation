@@ -27,7 +27,12 @@ class Modific:
         en_snts = []
         de_snts = []
 
+        num_per_input = []
+
         for en_snt, de_snt in zip(self.en_snts, self.de_snts):
+
+            n = 0
+
             en_nums = [int(i) for i in re.findall("\d+", en_snt)]
             de_nums = [int(i) for i in re.findall("\d+", de_snt)]
             if en_nums != de_nums:
@@ -37,9 +42,14 @@ class Modific:
                     if num + k > 0 and k != 0:
                         pert_en_snt = re.sub(str(num), str(num + k), en_snt)
                         pert_de_snt = re.sub(str(num), str(num + k), de_snt)
-                        de_snts.append(pert_de_snt)
-                        en_snts.append(pert_en_snt)
-        return {"en": en_snts, "de": de_snts}
+                        en_snts.append(pert_de_snt)
+                        de_snts.append(pert_en_snt)
+
+                        n += 1
+
+            num_per_input.append(str(n))
+
+        return {"en": en_snts, "de": de_snts, "num_per_input": num_per_input}
 
     @staticmethod
     def _get_span(s, w):
